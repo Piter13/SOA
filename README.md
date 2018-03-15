@@ -1,2 +1,2 @@
 # SOA
-SOA laboratory's exercises 
+SOA laboratory classes' exercises 
