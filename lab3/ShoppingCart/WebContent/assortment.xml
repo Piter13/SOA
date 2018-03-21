@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assortment>
+	<product>
+		<id>1</id>
+		<name>Nike LeBron XV</name>
+		<price>759.99</price>
+	</product>
+	<product>
+		<id>2</id>
+		<name>Nike Kobe A.D.</name>
+		<price>579.99</price>
+	</product>
+	<product>
+		<id>3</id>
+		<name>adidas Harden Vol. 2</name>
+		<price>599.99</price>
+	</product>
+	<product>
+		<id>4</id>
+		<name>Nike Hyperdunk 2017</name>
+		<price>309.99</price>
+	</product>
+	<product>
+		<id>5</id>
+		<name>Nike Kyrie 4</name>
+		<price>499.99</price>
+	</product>
+</assortment>
