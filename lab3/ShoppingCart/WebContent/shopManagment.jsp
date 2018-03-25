@@ -7,8 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Online Shop</title>
-<jsp:useBean id="cart" class="pl.marganski.shop.lab3.Cart"
-	scope="session" />
+<jsp:useBean id="cart" class="pl.marganski.shop.lab3.Cart" scope="session" />
 </head>
 <body>
 
@@ -51,8 +50,7 @@
 						%>
 					</td>
 					<td>
-						<button type="submit" name="product"
-							value="<x:out select="$shoes/id" />">Remove</button>
+						<button type="submit" name="product" value="<x:out select="$shoes/id" />">Remove</button>
 					</td>
 					<%
 						}

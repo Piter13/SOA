@@ -8,8 +8,7 @@ public class Cart {
 
 	public void addProduct(int id) {
 		if (cart.containsKey(id)) {
-			int amount = cart.get(id);
-			cart.put(id, amount + 1);
+			cart.put(id, cart.get(id) + 1);
 		} else {
 			cart.put(id, 1);
 		}
@@ -32,6 +31,10 @@ public class Cart {
 	}
 
 	public int getTotalAmount() {
-		return cart.size();
+		int amount = 0;
+		for (HashMap.Entry<Integer, Integer> entry : cart.entrySet()) {
+			amount += entry.getValue();
+		}
+		return amount;
 	}
 }
