@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Win or lose?</title>
+</h:head>
+<h:body>
+	<h1>Sprawdź szansę na wygraną!</h1>
+	<h:form>
+		Podaj swoje dane:
+		PESEL <h:inputText /> <br />
+		Imię <h:inputText /> <br />
+		Nazwisko <h:inputText /> <br />
+		<h:commandButton value="Wyślij" action="#{szansa.wyslij}" />
+	</h:form>
+</h:body>
+</html>

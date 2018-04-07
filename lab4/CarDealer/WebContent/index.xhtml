@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<title>Car Dealer</title>
+</h:head>
+<h:body>
+	<h1>Choose car's details</h1>
+	<h:form id="carForm">
+
+		<h:outputLabel for="brand" value="Brand: " />
+			<h:selectOneMenu id="brand" value="#{carBean.brand}"  style="width:150px">
+				<f:selectItem itemLabel="Select brand" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{carBean.brands}"/>
+				<f:ajax listener="#{carBean.onBrandChange}" render="model" />
+				<f:ajax listener="#{carBean.onButtonChange}" render="subBut" />
+			</h:selectOneMenu>
+
+		<br/> <br/>
+
+		<h:outputLabel for="model" value="Model: " />
+			<h:selectOneMenu id="model" value="#{carBean.model}" style="width:150px">
+			 	<f:selectItem itemLabel="Select model" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{carBean.models}" />
+				<f:ajax listener="#{carBean.onButtonChange}" render="subBut" />
+			</h:selectOneMenu>
+
+		<br/> <br/>
+
+		<h:outputLabel value="Price range: " />
+			<h:inputText value="#{carBean.price}" a:placeholder=" - ">
+				<f:ajax listener="#{carBean.onButtonChange}" render="subBut" />
+			</h:inputText>
+
+		<br/><br/>
+
+		<h:outputLabel value="Type of engine: " />
+			<h:selectOneRadio value="#{carBean.engine}">
+				<f:selectItem itemValue="Diesel" itemLabel="Diesel"/>
+				<f:selectItem itemValue="Petrol" itemLabel="Petrol" />
+				<f:ajax listener="#{carBean.onButtonChange}" render="subBut" />
+			</h:selectOneRadio>
+		<br/>
+
+		<b>Personal details:</b> <br/> <br/>
+		<h:outputLabel value="Name: " />
+			<h:inputText value="#{carBean.name}">
+				<f:ajax listener="#{carBean.onButtonChange}" render="subBut" />
+			</h:inputText>
+		<h:outputLabel value="  Phone number: " />
+			<h:inputText size="10" value="#{carBean.phone}">
+				<f:ajax listener="#{carBean.onButtonChange}" render="subBut" />
+			</h:inputText>
+
+		<br/> <br/>
+
+		<h:commandButton id="subBut" value="Submit" disabled="#{carBean.disabled}">
+			<f:ajax listener="#{carBean.chosenCars}" render="result"/>
+		</h:commandButton>
+		<h:commandButton type="reset" value="Reset">
+        	<f:ajax listener="#{carBean.clearForm}" render="carForm result"/>
+        </h:commandButton>
+
+	</h:form>
+
+	<h:form id="result" >
+         <h:dataTable value = "#{carBean.availableCars}" var = "car"> 
+            <h:column>    				
+               <f:facet name = "header">Brand</f:facet>    				
+               #{car.brand}
+            </h:column>
+            <h:column>
+               <f:facet name = "header">Model</f:facet>
+               #{car.model}
+            </h:column>
+            <h:column>
+               <f:facet name = "header">Price</f:facet>
+               #{car.price}
+            </h:column>
+         </h:dataTable>
+      </h:form>
+		
+</h:body>
+</html>
