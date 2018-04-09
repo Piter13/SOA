@@ -3,7 +3,7 @@ package pl.marganski.cars.lab4;
 public class Car {
 	private String brand, model, engine;
 	private int price;
-	
+
 	public Car(String brand, String model, String engine, int price) {
 		this.brand = brand;
 		this.model = model;
@@ -42,5 +42,5 @@ public class Car {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
+
 }

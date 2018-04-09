@@ -1,15 +1,13 @@
 package pl.marganski.cars.lab4;
 
-import pl.marganski.cars.lab4.Car;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
-
 
 @ManagedBean
 @ViewScoped
@@ -118,11 +116,21 @@ public class CarBean {
 
 	public void onBrandChange() {
 		models.clear();
-		models =  cars.stream().filter(object -> object.getBrand().equals(brand)).map(object -> object.getModel()).distinct().collect(Collectors.toList());
+		models = cars
+				.stream()
+				.filter(object -> object.getBrand().equals(brand))
+				.map(object -> object.getModel())
+				.distinct()
+				.collect(Collectors.toList());
 	}
-	
+
 	public List<String> getBrands() {
-		List<String> avalibleBrands = cars.stream().map(object -> object.getBrand()).distinct().collect(Collectors.toList());
+		List<String> avalibleBrands = cars
+				.stream()
+				.map(object -> object.getBrand())
+				.distinct()
+				.collect(Collectors.toList());
+		
 		return avalibleBrands;
 	}
 
@@ -132,31 +140,25 @@ public class CarBean {
 		int maxVal = Integer.parseInt(priceValues[1]);
 		availableCars.clear();
 		availableCars = cars.stream().filter(object -> object.getBrand().equals(brand))
-									.filter(object -> object.getModel().equals(model))
-									.filter(object -> Integer.valueOf(object.getPrice()) >= minVal)
-									.filter(object -> Integer.valueOf(object.getPrice()) <= maxVal)
-									.filter(object -> object.getEngine().equals(engine))
-									.collect(Collectors.toList());
-	
+				.filter(object -> object.getModel().equals(model))
+				.filter(object -> Integer.valueOf(object.getPrice()) >= minVal)
+				.filter(object -> Integer.valueOf(object.getPrice()) <= maxVal)
+				.filter(object -> object.getEngine().equals(engine)).collect(Collectors.toList());
+
 	}
-	
+
 	public void onButtonChange(AjaxBehaviorEvent event) {
-		if((model != null && !model.equals(""))
-				&& (brand != null && !brand.equals(""))
-				&& (engine != null && !engine.equals(""))
-				&& (name != null && !name.equals(""))
-				&& (phone != null && !phone.equals(""))) {
+		if (Stream.of(brand, engine, model, name, phone, price).allMatch(x -> x != null && !x.equals(""))) {
 			this.disabled = false;
-		} 
-		else {
+		} else {
 			this.disabled = true;
 		}
 	}
-	
+
 	public void clearForm(AjaxBehaviorEvent event) {
 		model = "";
 		brand = "";
-		price = " - ";
+		price = "-";
 		phone = "";
 		name = "";
 		availableCars.clear();

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html5>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<title>Your feedback</title>
@@ -12,161 +10,166 @@
 	<h1>Give us your opinion!</h1>
 	<f:view>
 		<h:form>
+		
 			<h:outputLabel value="Imię: " />
 				<h:inputText id="name" value="#{pollBean.name}" required="true" />
 				<h:message for="name" style="color:red" />
-				<br/><br/>
+				<br /><br />
+				
 			<h:outputLabel value="E-mail: " />
 				<h:inputText id="email" value="#{pollBean.email}" required="true" >
 					<f:validateRegex pattern="[A-Za-z0-9._+-]{0,}@[A-Za-z0-9.-]{0,}\.[A-Za-z]{2,6}" />
 				</h:inputText>
 				<h:message for="email" style="color:red" />
-				<br/><br/>
+				<br /><br />
+			
 			<h:outputLabel value="Wiek: "/>
 				<h:inputText id="age" value = "#{pollBean.age}">
 					<f:validateLongRange minimum="10" maximum="100" />
 				</h:inputText>
 				<h:message for="age" style="color:red" />
-				<br/><br/>
+				<br /><br />
+			
 			<h:outputLabel value="Płeć: " />
 				<h:selectOneRadio id="sex" value="#{pollBean.sex}" valueChangeListener="#{pollBean.renderAdditionalQuestions}" binding="#{pollBean.selectOneRadio}" onchange="submit()">
-					<f:selectItem itemValue="Male" itemLabel="Male"/>
-					<f:selectItem itemValue="Female" itemLabel="Female"/>
+					<f:selectItem itemValue="Male" itemLabel="Male" />
+					<f:selectItem itemValue="Female" itemLabel="Female" />
 				</h:selectOneRadio>
-				<br/>
+				<br />
+			
 			<h:outputLabel for="degree" value="Wykształcenie: " />
 				<h:selectOneMenu id="degree" value="#{pollBean.degree}" style="width:150px">
 					<f:selectItem itemLabel="-----" itemValue="" noSelectionOption="true" />
 					<f:selectItems value="#{pollBean.degrees}" />
 				</h:selectOneMenu>
-			<br/><br/>
+			<br /><br />
 			
 			<h:panelGrid rendered="#{pollBean.subviewW}">
 				<h:form>
-					<h:outputLabel value="Wzrost: "/>
+					<h:outputLabel value="Wzrost: " />
 					<h:inputText value = "#{pollBean.womenHeight}">
 						<f:validateLongRange minimum="150" maximum="185" />
-					</h:inputText> <br/><br/>
-					<b> Wymiary: </b> <br/><br/>
+					</h:inputText> <br /><br />
+					<b> Wymiary: </b> <br /><br />
 					<h:outputLabel value="Biust: " />
 						<h:inputText id="bust" />
-					<br/><br/>
+					<br /><br />
 					<h:outputLabel value="Miseczka: " />
 						<h:inputText id="cup" />
-					<br/><br/>
+					<br /><br />
 					<h:outputLabel value="Talia: " />
 						<h:inputText id="waist" />
-					<br/><br/>
+					<br /><br />
 					<h:outputLabel value="Biodra: " />
 						<h:inputText id="hips" />
-					<br/><br/>
+					<br /><br />
 					<h:outputLabel value="Długość nogi: " />
 						<h:inputText id="legs" />
-					<br/><br/>
+					<br /><br />
 				</h:form>
 			</h:panelGrid>
 			
 			<h:panelGrid rendered="#{pollBean.subviewM}">
 				<h:form>
-					<h:outputLabel value="Wzrost: "/>
+					<h:outputLabel value="Wzrost: " />
 					<h:inputText value = "#{pollBean.menHeight}">
 						<f:validateLongRange minimum="165" maximum="200" />
-					</h:inputText> <br/><br/>
+					</h:inputText> <br /><br />
 					<b>Wymiary: </b> <br/><br/>
 					<h:outputLabel value="Klatka piersiowa : " />
-						<h:inputText id="chest"/>
-					<br/><br/>
+						<h:inputText id="chest" />
+					<br /><br />
 					<h:outputLabel value="Pas: " />
 						<h:inputText id="menWaist" />
-					<br/><br/>
+					<br /><br />
 					<h:outputLabel value="Długość nogi: " />
 						<h:inputText id="menLegs" />
-					<br/><br/>
+					<br /><br />
 				</h:form>
 			</h:panelGrid>
 
 			<h:outputLabel value="Ile jesteś w stanie przeznaczyc miesięcznie na zakup ubrania?  " /> 
-			<h:selectOneMenu id="quest1" value="#{pollBean.quest1}">
-				<f:selectItem itemValue="do 100 zł" itemLabel="do 100 zł" />
-				<f:selectItem itemValue="100-500 zł" itemLabel="100-500 zł" />
-				<f:selectItem itemValue="500-1000 zł" itemLabel="500-1000 zł" />
-				<f:selectItem itemValue="powyżej 1000 zł" itemLabel="powyżej 1000 zł" />
-			</h:selectOneMenu>
-
-			<br/><br/>
+				<h:selectOneMenu id="quest1" value="#{pollBean.quest1}">
+					<f:selectItem itemValue="do 100 zł" itemLabel="do 100 zł" />
+					<f:selectItem itemValue="100-500 zł" itemLabel="100-500 zł" />
+					<f:selectItem itemValue="500-1000 zł" itemLabel="500-1000 zł" />
+					<f:selectItem itemValue="powyżej 1000 zł" itemLabel="powyżej 1000 zł" />
+				</h:selectOneMenu>
+				<br /><br />
+			
 			<h:outputLabel value="Jak często dokonujesz zakupu ubrania?  " />
-			<h:selectOneMenu id="quest2" value="#{pollBean.quest2}">
-				<f:selectItem itemValue="Codzienne" itemLabel="Codzienne" />
-				<f:selectItem itemValue="Raz w tygodniu" itemLabel="Raz w tygodniu" />
-				<f:selectItem itemValue="Raz w miesiącu" itemLabel="Raz w miesiącu" />
-				<f:selectItem itemValue="Kilka razy w roku" itemLabel="Kilka razy w roku" />
-			</h:selectOneMenu>
-
-			<br/><br/>
+				<h:selectOneMenu id="quest2" value="#{pollBean.quest2}">
+					<f:selectItem itemValue="Codzienne" itemLabel="Codzienne" />
+					<f:selectItem itemValue="Raz w tygodniu" itemLabel="Raz w tygodniu" />
+					<f:selectItem itemValue="Raz w miesiącu" itemLabel="Raz w miesiącu" />
+					<f:selectItem itemValue="Kilka razy w roku" itemLabel="Kilka razy w roku" />
+				</h:selectOneMenu>
+				<br /><br />
+				
 			<h:outputLabel value="W jakich kolorach preferujesz ubrania  ?" />
-			<h:selectManyCheckbox id="quest3" value="#{pollBean.quest3}">
-				<f:selectItem itemValue="kolorowo-jaskrawych" itemLabel="kolorowo-jaskrawych" />
-				<f:selectItem itemValue="stonowanych w szarościach" itemLabel="stonowanych w szarościach" />
-				<f:selectItem itemValue="w czerni i bieli" itemLabel="w czerni i bieli" />
-				<f:selectItem itemValue="w samej czerni" itemLabel="w samej czerni" />
-			</h:selectManyCheckbox>
-
-			<br/>
+				<h:selectManyCheckbox id="quest3" value="#{pollBean.quest3}">
+					<f:selectItem itemValue="kolorowo-jaskrawych" itemLabel="kolorowo-jaskrawych" />
+					<f:selectItem itemValue="stonowanych w szarościach" itemLabel="stonowanych w szarościach" />
+					<f:selectItem itemValue="w czerni i bieli" itemLabel="w czerni i bieli" />
+					<f:selectItem itemValue="w samej czerni" itemLabel="w samej czerni" />
+				</h:selectManyCheckbox>
+				<br />
+			
 			<h:outputLabel value="Jakiego rodzaju ubrania najchętniej kupujesz  ?" />
-			<h:panelGrid rendered="#{pollBean.subviewM}">
-			<h:selectManyCheckbox id="quest4M" value="#{pollBean.quest4M}">
-				<f:selectItem itemValue="spodnie" itemLabel="spodnie" />
-				<f:selectItem itemValue="spodenki" itemLabel="spodenki" />
-				<f:selectItem itemValue="garnitury" itemLabel="garnitury" />
-				<f:selectItem itemValue="koszule" itemLabel="koszule" />
-				<f:selectItem itemValue="krawaty" itemLabel="krawaty" />
-			</h:selectManyCheckbox>
-			</h:panelGrid>
-			<h:panelGrid rendered="#{pollBean.subviewW}">
-			<h:selectManyCheckbox id="quest4W" value="#{pollBean.quest4W}">
-				<f:selectItem itemValue="spodnie" itemLabel="spodnie" />
-				<f:selectItem itemValue="spódniczki" itemLabel="spódniczki" />
-				<f:selectItem itemValue="garsonki" itemLabel="garsonki" />
-				<f:selectItem itemValue="bluzki" itemLabel="bluzki" />
-			</h:selectManyCheckbox>
-			</h:panelGrid>
-
-			<br/>
+				<h:panelGrid rendered="#{pollBean.subviewM}">
+				<h:selectManyCheckbox id="quest4M" value="#{pollBean.quest4M}">
+					<f:selectItem itemValue="spodnie" itemLabel="spodnie" />
+					<f:selectItem itemValue="spodenki" itemLabel="spodenki" />
+					<f:selectItem itemValue="garnitury" itemLabel="garnitury" />
+					<f:selectItem itemValue="koszule" itemLabel="koszule" />
+					<f:selectItem itemValue="krawaty" itemLabel="krawaty" />
+				</h:selectManyCheckbox>
+				</h:panelGrid>
+				<h:panelGrid rendered="#{pollBean.subviewW}">
+				<h:selectManyCheckbox id="quest4W" value="#{pollBean.quest4W}">
+					<f:selectItem itemValue="spodnie" itemLabel="spodnie" />
+					<f:selectItem itemValue="spódniczki" itemLabel="spódniczki" />
+					<f:selectItem itemValue="garsonki" itemLabel="garsonki" />
+					<f:selectItem itemValue="bluzki" itemLabel="bluzki" />
+				</h:selectManyCheckbox>
+				</h:panelGrid>
+				<br />
+			
 			<h:outputLabel value="Kiedy ostatnio robiłeś u nas zakupy?  " />
-			<h:selectOneMenu id="quest5" value="#{pollBean.quest5}">
-				<f:selectItem itemValue="Wczoraj" itemLabel="Wczoraj" />
-				<f:selectItem itemValue="W zeszłym tygodniu" itemLabel="W zeszłym tygodniu" />
-				<f:selectItem itemValue="W zeszłym miesiącu" itemLabel="W zeszłym miesiącu" />
-				<f:selectItem itemValue="Kilka miesięcy temu" itemLabel="Kilka miesięcy temu" />
-				<f:selectItem itemValue="Nie pamiętam" itemLabel="Nie pamiętam" />
-			</h:selectOneMenu>
-
-			<br/><br/>
+				<h:selectOneMenu id="quest5" value="#{pollBean.quest5}">
+					<f:selectItem itemValue="Wczoraj" itemLabel="Wczoraj" />
+					<f:selectItem itemValue="W zeszłym tygodniu" itemLabel="W zeszłym tygodniu" />
+					<f:selectItem itemValue="W zeszłym miesiącu" itemLabel="W zeszłym miesiącu" />
+					<f:selectItem itemValue="Kilka miesięcy temu" itemLabel="Kilka miesięcy temu" />
+					<f:selectItem itemValue="Nie pamiętam" itemLabel="Nie pamiętam" />
+				</h:selectOneMenu>
+				<br /><br />
+				
 			<h:outputLabel value="Czy jesteś zadowolony z zakupu?  " />
-			<h:selectOneMenu id="quest6" value="#{pollBean.quest6}">
-				<f:selectItem itemValue="Tak" itemLabel="Tak" />
-				<f:selectItem itemValue="Raczej tak" itemLabel="Raczej tak" />
-				<f:selectItem itemValue="Raczej nie" itemLabel="Raczej nie" />
-				<f:selectItem itemValue="Nie" itemLabel="Nie" />
-				<f:selectItem itemValue="Nie wiem" itemLabel="Nie wiem" />
-			</h:selectOneMenu>
-
-			<br/><br/>
+				<h:selectOneMenu id="quest6" value="#{pollBean.quest6}">
+					<f:selectItem itemValue="Tak" itemLabel="Tak" />
+					<f:selectItem itemValue="Raczej tak" itemLabel="Raczej tak" />
+					<f:selectItem itemValue="Raczej nie" itemLabel="Raczej nie" />
+					<f:selectItem itemValue="Nie" itemLabel="Nie" />
+					<f:selectItem itemValue="Nie wiem" itemLabel="Nie wiem" />
+				</h:selectOneMenu>
+				<br /><br />
+			
 			<h:outputLabel value="Czy jesteś zadowolony z naszych pracowników?  " />
-			<h:selectOneMenu id="quest7" value="#{pollBean.quest7}">
-				<f:selectItem itemValue="Tak" itemLabel="Tak" />
-				<f:selectItem itemValue="Raczej tak" itemLabel="Raczej tak" />
-				<f:selectItem itemValue="Raczej nie" itemLabel="Raczej nie" />
-				<f:selectItem itemValue="Nie" itemLabel="Nie" />
-				<f:selectItem itemValue="Nie wiem" itemLabel="Nie wiem" />
-			</h:selectOneMenu>
-
-			<br/><br/>
-			<h:outputLabel value="Wpisz swoje uwagi:  " /> <br/>
-				<h:inputTextarea id="textArea" rows="10" cols="60" value="#{pollBean.quest8}"/>
+				<h:selectOneMenu id="quest7" value="#{pollBean.quest7}">
+					<f:selectItem itemValue="Tak" itemLabel="Tak" />
+					<f:selectItem itemValue="Raczej tak" itemLabel="Raczej tak" />
+					<f:selectItem itemValue="Raczej nie" itemLabel="Raczej nie" />
+					<f:selectItem itemValue="Nie" itemLabel="Nie" />
+					<f:selectItem itemValue="Nie wiem" itemLabel="Nie wiem" />
+				</h:selectOneMenu>
+				<br /><br />
+				
+			<h:outputLabel value="Wpisz swoje uwagi:  " /> <br />
+				<h:inputTextarea id="textArea" rows="10" cols="60" value="#{pollBean.quest8}" />
 	
-			<br/>
-			<h:commandButton value="Submit" action="#{pollBean.sendData}"/>
+			<br />
+			<h:commandButton value="Submit" action="#{pollBean.sendData}" />
 		</h:form>
 	</f:view>
 </h:body>

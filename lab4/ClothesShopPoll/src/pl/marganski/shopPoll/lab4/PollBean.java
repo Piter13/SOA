@@ -1,8 +1,7 @@
 package pl.marganski.shopPoll.lab4;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -11,34 +10,52 @@ import javax.faces.component.html.HtmlSelectOneRadio;
 @SessionScoped
 @ManagedBean
 public class PollBean {
-	
-	private String name, email, age, sex, degree, womenHeight, menHeight,
-				   quest1, quest2, quest5, quest6, quest7, quest8;
+
 	private int number;
+	private String name, email, age, sex, degree, womenHeight, menHeight, quest1, quest2, quest5, quest6, quest7,
+			quest8;
 
 	private List<String> quest3, quest4M, quest4W;
-	private Map<String, String> degrees;
-	
+	private List<String> degrees;
+
 	private boolean subviewM, subviewW;
-    private HtmlSelectOneRadio selectOneRadio;
-	
+	private HtmlSelectOneRadio selectOneRadio;
+
 	public PollBean() {
-		degrees = new HashMap<String, String>();
-		degrees.put("Podstawowe", "Podstawowe");
-		degrees.put("Gimnazjalne", "Gimnazjalne");
-		degrees.put("Zasadnicze", "Zasadnicze");
-		degrees.put("Œrednie", "Œrednie");
-		degrees.put("Wy¿sze", "Wy¿sze");
+		degrees = new ArrayList<String>();
+		degrees.add("Podstawowe");
+		degrees.add("Gimnazjalne");
+		degrees.add("Zasadnicze");
+		degrees.add("Œrednie");
+		degrees.add("Wy¿sze");
 		this.subviewM = false;
-        this.subviewW = false;
-	}
-		
-	public Map<String, String> getDegrees() {
-		return degrees;
+		this.subviewW = false;
 	}
 
-	public void setDegrees(Map<String, String> degrees) {
-		this.degrees = degrees;
+	public void renderAdditionalQuestions() {
+		if ("Male".equals(getSelectOneRadio().getValue().toString())) {
+			subviewM = true;
+			subviewW = false;
+		} else {
+			subviewM = false;
+			subviewW = true;
+		}
+	}
+
+	public String sendData() {
+		return "summary.xhtml";
+	}
+
+	public void increment() {
+		number++;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
 	public String getName() {
@@ -48,7 +65,31 @@ public class PollBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
 	public String getDegree() {
 		return degree;
 	}
@@ -71,30 +112,6 @@ public class PollBean {
 
 	public void setMenHeight(String menHeight) {
 		this.menHeight = menHeight;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
-	public String getAge() {
-		return age;
-	}
-
-	public void setAge(String age) {
-		this.age = age;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getQuest1() {
@@ -168,7 +185,15 @@ public class PollBean {
 	public void setQuest4W(List<String> quest4w) {
 		quest4W = quest4w;
 	}
-	
+
+	public List<String> getDegrees() {
+		return degrees;
+	}
+
+	public void setDegrees(List<String> degrees) {
+		this.degrees = degrees;
+	}
+
 	public boolean isSubviewM() {
 		return subviewM;
 	}
@@ -193,27 +218,4 @@ public class PollBean {
 		this.selectOneRadio = selectOneRadio;
 	}
 
-	public void renderAdditionalQuestions(){
-        if ("Male".equals(getSelectOneRadio().getValue().toString())){
-            subviewM = true;
-            subviewW = false;
-        }
-        else {
-            subviewM = false;
-            subviewW = true;
-        }
-    }
-	
-	public String sendData(){
-        return "summary.xhtml";
-    }
-	 
-    public int getNumber() {
-        return number;
-    }
- 
-    public void increment() {
-        number++;
-    }
-	
 }

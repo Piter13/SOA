@@ -64,22 +64,22 @@
 
 	</h:form>
 
-	<h:form id="result" >
-         <h:dataTable value = "#{carBean.availableCars}" var = "car"> 
+	<h:panelGrid id="result" >
+         <h:dataTable value="#{carBean.availableCars}" var="car"> 
             <h:column>    				
-               <f:facet name = "header">Brand</f:facet>    				
+               <f:facet name="header">Brand</f:facet>    				
                #{car.brand}
             </h:column>
             <h:column>
-               <f:facet name = "header">Model</f:facet>
+               <f:facet name="header">Model</f:facet>
                #{car.model}
             </h:column>
             <h:column>
-               <f:facet name = "header">Price</f:facet>
+               <f:facet name="header">Price</f:facet>
                #{car.price}
             </h:column>
          </h:dataTable>
-      </h:form>
+      </h:panelGrid>
 		
 </h:body>
 </html>
