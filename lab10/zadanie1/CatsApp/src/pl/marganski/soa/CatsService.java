@@ -44,9 +44,9 @@ public class CatsService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Cat> updateCat(@PathParam("id") int id, Cat cat){
 		cat.setId(id);
-        shelter.update(id, cat);
-        return shelter.getCats();
-    }
+        	shelter.update(id, cat);
+        	return shelter.getCats();
+    	}
 
 	@DELETE
 	@Path("/{id}")
