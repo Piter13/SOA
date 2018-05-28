@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 @Path("/movies")
 public class MovieService {
 	
-	private MovieManager movieManager = new MovieManager();
+	static private MovieManager movieManager = new MovieManager();
 	
 	@GET
 	@Path("/{id}")
