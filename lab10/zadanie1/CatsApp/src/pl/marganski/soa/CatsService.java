@@ -31,12 +31,12 @@ public class CatsService {
 	}
 	
 	@POST
-    @Consumes(MediaType.APPLICATION_JSON)
+        @Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-    public List<Cat> saveCats(List<Cat> cats) {
+        public List<Cat> saveCats(List<Cat> cats) {
 		shelter.save(cats);
 		return shelter.getCats();
-    }
+        }
 	
 	@PUT
 	@Path("/{id}")
@@ -44,9 +44,9 @@ public class CatsService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Cat> updateCat(@PathParam("id") int id, Cat cat){
 		cat.setId(id);
-        shelter.update(id, cat);
-        return shelter.getCats();
-    }
+        	shelter.update(id, cat);
+        	return shelter.getCats();
+    	}
 
 	@DELETE
 	@Path("/{id}")
