@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<application  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"  
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd" version="7">  
+  
+    <display-name>Abcd-ear</display-name>  
+
+    <module>  
+        <ejb>Abcd-ejb.jar</ejb>  
+    </module>  
+    <library-directory>lib</library-directory>  
+    <data-source>  
+        <name>java:jboss/datasources/projekt-ds</name>  
+        <class-name>org.postgresql.Driver</class-name>  
+        <url>jdbc:postgresql://localhost:5432/projectSOA</url>  
+        <user>postgres</user>  
+        <password>postgres1</password>  
+    </data-source>  
+</application> 

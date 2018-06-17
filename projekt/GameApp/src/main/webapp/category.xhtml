@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:b="http://bootsfaces.net/ui"
+      	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+      	xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:f = "http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+		
+<h:head>
+	<title>New category</title>
+</h:head>
+<body>
+<h:body>
+	<ui:fragment rendered="#{not securityController.isAuthenticated()}">
+		<h:form>
+			<h:commandButton value="Log in" action="login?faces-redirect=true" />
+		</h:form>
+	</ui:fragment>
+
+	<ui:fragment rendered="#{securityController.isAuthenticated()}">
+		<h:form>
+			<h:commandButton value="Home" action="home?faces-redirect=true" />
+			<h:commandButton value="Add new mag" action="element?faces-redirect=true" />
+			<h:commandButton value="Log out" actionListener="#{securityController.logout()}" />
+		</h:form>
+	    <h:form>
+		    Castle's height: :<h:inputText value="#{jsfController.height}"></h:inputText><br/>
+			 <h:selectOneMenu value="#{jsfController.category}">
+				<f:selectItem itemValue="#{null}" itemLabel="-- select --" />
+		        <f:selectItems value="#{jsfController.getCategories()}"/>
+		     </h:selectOneMenu>
+		     <br/>
+		     <h:commandButton value="Submit" action="#{jsfController.addCategory()}"></h:commandButton>
+	    </h:form>  
+	</ui:fragment>
+</h:body>
+</body>
+</html>

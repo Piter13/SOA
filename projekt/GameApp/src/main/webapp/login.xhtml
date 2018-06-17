@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<title>Login page</title>
+</h:head>
+<h:body>
+        <b:alert severity="danger" colMd="4" offsetMd="4" style="margin-top: 10px;" closable="true"
+                 rendered="#{securityController.isNotEmpty(securityController.message)}">
+            <h:outputText value="#{securityController.message}"/>
+        </b:alert>
+
+        <h:form style="margin-top: auto; margin-left: auto; margin-right: auto; margin-botom: auto;" prependId="false">
+            Username:
+            	<h:inputText placeholder="Username" required="true"
+            		value="#{securityController.username}"/><br/>
+            Password:
+            	<h:inputText placeholder="Password" type="password"
+            		value="#{securityController.password}" required="true"/><br/>
+            <h:commandButton value="Login" action="#{securityController.login()}"/>
+        </h:form>
+
+</h:body>
+</html>
