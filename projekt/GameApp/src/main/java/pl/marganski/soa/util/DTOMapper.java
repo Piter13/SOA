@@ -26,8 +26,9 @@ public class DTOMapper {
 
 	public static Mag mapMagDTOToMag(MagDTO magDTO) {
 		Mag mag = new Mag();
-
-		mag.setId(magDTO.getId());
+		if(Objects.nonNull(magDTO.getId())) {
+			mag.setId(magDTO.getId());
+		}
 		mag.setName(magDTO.getName());
 		mag.setMana(magDTO.getMana());
 		mag.setElement(magDTO.getElement());

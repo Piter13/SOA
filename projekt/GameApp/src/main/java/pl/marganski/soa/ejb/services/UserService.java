@@ -1,6 +1,8 @@
 package pl.marganski.soa.ejb.services;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.SessionContext;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.transaction.Transactional;
@@ -17,6 +19,9 @@ public class UserService {
 
 	@EJB
 	private UserRepository userRepository;
+	
+	@Resource
+	SessionContext sessionContext;
 
 	public User getUser(String username) {
 		return userRepository.findOneByUsername(username).orElse(new User());
@@ -28,4 +33,9 @@ public class UserService {
 		user.setPassword(DigestUtils.sha256Hex(newPassword));
 		userRepository.update(user);
 	}
+	
+	public User findCurrentUser() {
+        String login = sessionContext.getCallerPrincipal().getName();
+        return userRepository.findOneByUsername(login).orElse(null);
+    }
 }

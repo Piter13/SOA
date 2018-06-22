@@ -12,9 +12,7 @@ public class PasswordController {
     @EJB
     private UserService userService;
 
-    private String username = SecurityUtils.getLoggedUser()
-            								.orElseThrow(IllegalStateException::new)
-            								.getUsername();
+    private String username = SecurityUtils.getLoggedUser().orElseThrow(IllegalStateException::new).getUsername();
     private String newPassword;
     private String message;
 

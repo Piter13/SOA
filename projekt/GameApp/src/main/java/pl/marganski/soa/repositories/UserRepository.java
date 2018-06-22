@@ -15,11 +15,11 @@ import pl.marganski.soa.jpa.entities.User;
 @Startup
 public class UserRepository {
 	@PersistenceContext(unitName = "GameApp")
-	private EntityManager em;
+	private EntityManager entityManager;
 
 	public Optional<User> findOneByUsername(String username) {
 		try {
-			Query query = em.createNamedQuery("user.specificUserByName");
+			Query query = entityManager.createNamedQuery("user.specificUserByName");
 			query.setParameter("username", username);
 			Object result = query.getSingleResult();
 			return Optional.of((User) result);
@@ -30,7 +30,7 @@ public class UserRepository {
 	}
 
 	public void update(User user) {
-		em.merge(user);
+		entityManager.merge(user);
 	}
 
 	

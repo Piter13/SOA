@@ -15,31 +15,31 @@ import pl.marganski.soa.jpa.entities.Castle;
 @Stateless
 public class CastleRepository {
 	@PersistenceContext(unitName = "GameApp")
-	private EntityManager em;
+	private EntityManager entityManager;
 
 	public Optional<Castle> findOne(int id) {
-		Query q = em.createNamedQuery("castle.specificCastle");
-		q.setParameter("id", id);
-		return Optional.ofNullable((Castle) q.getSingleResult());
+		Query query = entityManager.createNamedQuery("castle.specificCastle");
+		query.setParameter("id", id);
+		return Optional.ofNullable((Castle) query.getSingleResult());
 	}
 
 	public List<Castle> findAll() {
-		Query q = em.createNamedQuery("castle.allCastles");
-		List<Castle> results = q.getResultList();
+		Query query = entityManager.createNamedQuery("castle.allCastles");
+		List<Castle> results = query.getResultList();
 		return results;
 	}
 
 	public void save(Castle castle) {
-		em.persist(castle);
+		entityManager.persist(castle);
 	}
 
 	public void update(Castle castle) {
-		em.merge(castle);
+		entityManager.merge(castle);
 	}
 
 	public void delete(int id) {
-		Query q = em.createNamedQuery("castle.deleteCastle");
-		q.setParameter("id", id);
-		q.executeUpdate();
+		Query query = entityManager.createNamedQuery("castle.deleteCastle");
+		query.setParameter("id", id);
+		query.executeUpdate();
 	}
 }

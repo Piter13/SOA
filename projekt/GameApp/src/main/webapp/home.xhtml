@@ -6,6 +6,7 @@
       	xmlns:c="http://java.sun.com/jsp/jstl/core" 
       	xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:f = "http://java.sun.com/jsf/core"
+		xmlns:o="http://omnifaces.org/ui"
 		xmlns:p="http://primefaces.org/ui">
 		
 <h:head>
@@ -15,42 +16,88 @@
 <h:body>
 	<ui:fragment rendered="#{not securityController.isAuthenticated()}">
 		<h:form>
-			<h:commandButton value="Log in" action="login?faces-redirect=true" />
+			<p:commandButton value="Log in" action="login?faces-redirect=true" />
 		</h:form>
 	</ui:fragment>
 
 	<ui:fragment rendered="#{securityController.isAuthenticated()}">
-		<h:form>
-			<h:commandButton value="Add new mag" action="element?faces-redirect=true" />
-			<h:commandButton value="Add new castle" action="category?faces-redirect=true" />
-			<h:commandButton value="Change password" action="changePassword?faces-redirect=true" />
-			<h:commandButton value="Log out" actionListener="#{securityController.logout()}" />
+		<h:form id="menu">
+			<p:commandButton value="Add new mag" action="element?faces-redirect=true" />
+			<p:commandButton value="Add new castle" action="category?faces-redirect=true" />
+			<p:commandButton value="Change password" action="changePassword?faces-redirect=true" />
+			<p:commandButton value="Log out" actionListener="#{securityController.logout()}" />
 		</h:form>
 		
-	    <h:form>
+	    <h:form id="mainForm">
 	   		<ul>
-	    		<ui:repeat var="castle" value="#{jsfController.getCastles()}" varStatus="status">
-	     			<li>
-	     				Category ID: #{castle.id}, height: #{castle.height} 
-	     				<h:commandButton value="Delete" action="#{jsfController.removeCastle(castle.id)}"
-	     					disabled="#{securityController.isAuthorizedToEditCategory(castle.id)}" />
-	     				<h:commandButton value="Edit" actionListener="#{jsfController.forwardToEditCategory(castle.id)}"
-	     					disabled="#{securityController.isAuthorizedToEditCategory(castle.id)}" />
-	     				<ul>
-	     					<ui:repeat var="mag" value="#{castle.mags.toArray()}" varStatus="status">
-	     						<li>
-	     							name: #{mag.name}, mana: #{mag.mana}, element: #{mag.element}, power: #{mag.power}
-	     							<h:commandButton value="Delete" action="#{jsfController.removeMag(mag.id)}"
-	     								disabled="#{securityController.isAuthorizedToEditCategory(castle.id)}" />
-	     							<h:commandButton value="Edit" action="#{jsfController.forwardToEditElement(mag.id)}"
-	     								disabled="#{securityController.isAuthorizedToEditCategory(castle.id)}" />
-	     						</li>
-	     					</ui:repeat>
-	     				</ul>
-	     			</li><br/>
-	     		</ui:repeat>
+	    		<p:dataTable var="castle" value="#{jsfController.getCastles()}" id="castlesTable">
+	     			<p:column width="30" headerText="ID">
+						<h:outputText value="#{castle.id}"/>
+					</p:column>
+					<p:column width="50" headerText="Castle height">
+						<h:outputText value="#{castle.height}"/>
+					</p:column>
+					<p:column width="60" headerText="Owner">
+						<h:outputText value="#{castle.user.username}"/>
+					</p:column>
+					<p:column width="90" headerText="">
+						<p:commandButton value="Delete" action="#{jsfController.removeCastle(castle.id)}"  disabled="#{securityController.isAuthorizedToEditCategory(castle.id)}" process="@this" update=":mainForm:castlesTable bestMagsTable"/>
+					</p:column>
+					<p:column width="70" headerText="">
+						<p:commandButton value="Edit" actionListener="#{jsfController.forwardToEditCategory(castle.id)}" disabled="#{securityController.isAuthorizedToEditCategory(castle.id)}" />
+					</p:column>
+
+					<p:column width="*" headerText="Mags">
+						<p:dataTable var="mag" value="#{castle.mags.toArray()}"  id="magsTable">
+							<p:column width="20" headerText="ID">
+								<h:outputText value="#{mag.id}"/>
+							</p:column>
+							<p:column width="50" headerText="Name">
+								<h:outputText value="#{mag.name}"/>
+							</p:column>
+							<p:column width="40" headerText="Mana">
+								<h:outputText value="#{mag.mana}"/>
+							</p:column>
+							<p:column width="30" headerText="Element">
+								<h:outputText value="#{mag.element}"/>
+							</p:column>
+							<p:column width="40" headerText="Power">
+								<h:outputText value="#{mag.power}"/>
+							</p:column>
+							<p:column width="50" headerText="">
+								<p:commandButton value="Delete" action="#{jsfController.removeMag(mag.id)}" disabled="#{securityController.isAuthorizedToEditCategory(castle.id)}" process="@this" update=":mainForm:castlesTable:magsTable bestMagsTable"/>
+							</p:column>
+							<p:column width="40" headerText="">
+								<p:commandButton value="Edit" action="#{jsfController.forwardToEditElement(mag.id)}" disabled="#{securityController.isAuthorizedToEditCategory(castle.id)}" />
+							</p:column>
+							<p:column width="70" headerText="">
+								<p:commandButton value="Two step edition" action="#{editMag.forwardToEditElement(mag.id)}" disabled="#{securityController.isAuthorizedToEditCategory(castle.id)}" />
+							</p:column>
+	            		</p:dataTable>
+					</p:column>
+
+	    		</p:dataTable>
 	     	</ul>
-	     </h:form>   
+		 </h:form>
+		 
+		 <div>
+			 <h1>Best mags standing</h1>
+			 <p:socket channel="/notifications">
+			 	<p:ajax event="message" update="@all"/>
+		     </p:socket>
+				
+			<h:dataTable value="#{listBestMags.bestMags}" var ="mag" id="bestMagsTable">  
+				<h:column>
+					<f:facet name="header">Name</f:facet>    				
+				    #{mag.name}
+				</h:column>
+				<h:column>
+				    <f:facet name="header">Mana</f:facet>
+				    #{mag.mana}
+				</h:column>
+			</h:dataTable>
+
+		 </div>
      </ui:fragment>
 </h:body>
 </body>

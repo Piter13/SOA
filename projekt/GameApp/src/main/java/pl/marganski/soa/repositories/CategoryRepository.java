@@ -16,16 +16,16 @@ import pl.marganski.soa.jpa.entities.Category;
 public class CategoryRepository {
 
 	@PersistenceContext(unitName = "GameApp")
-	private EntityManager em;
+	private EntityManager entityManager;
 
 	public Optional<Category> findOne(int id) {
-		Query query = em.createNamedQuery("category.specificCategory");
+		Query query = entityManager.createNamedQuery("category.specificCategory");
 		query.setParameter("id", id);
 		return Optional.ofNullable((Category) query.getSingleResult());
 	}
 
 	public List<Category> findAll() {
-		Query query = em.createNamedQuery("category.allCategories");
+		Query query = entityManager.createNamedQuery("category.allCategories");
 		List<Category> results = query.getResultList();
 		return results;
 	}

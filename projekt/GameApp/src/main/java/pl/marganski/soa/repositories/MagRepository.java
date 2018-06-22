@@ -17,40 +17,47 @@ import pl.marganski.soa.jpa.entities.Mag;
 public class MagRepository {
 
 	@PersistenceContext(unitName = "GameApp")
-	private EntityManager em;
+	private EntityManager entityManager;
 
 	@EJB
 	CastleRepository castleRepository;
 
 	public Optional<Mag> findOne(int id) {
-		Query query = em.createNamedQuery("mag.specificMag");
+		Query query = entityManager.createNamedQuery("mag.specificMag");
 		query.setParameter("id", id);
 		return Optional.ofNullable((Mag) query.getSingleResult());
 	}
 
 	public List<Mag> findAll() {
-		Query query = em.createNamedQuery("mag.allMags");
+		Query query = entityManager.createNamedQuery("mag.allMags");
 		List<Mag> results = query.getResultList();
 		return results;
 	}
 
 	public void save(Mag mag) {
-		em.persist(mag);
+		entityManager.persist(mag);
 	}
 
 	public void update(Mag mag) {
-		em.merge(mag);
+		entityManager.merge(mag);
 	}
 
 	public void delete(int id) {
-		Query query = em.createNamedQuery("mag.deleteMag");
+		Query query = entityManager.createNamedQuery("mag.deleteMag");
 		query.setParameter("id", id);
 		query.executeUpdate();
 	}
 
 	public void deleteMagsInCastle(int id) {
-		Query query = em.createNamedQuery("mag.deleteMagsInCastle");
+		Query query = entityManager.createNamedQuery("mag.deleteMagsInCastle");
 		query.setParameter("castle", castleRepository.findOne(id).get());
 		query.executeUpdate();
 	}
+	
+	public List<Mag> findBestMags(int i) {
+		Query query = entityManager.createNamedQuery("mag.bestMags").setMaxResults(i);
+    	List<Mag> results = query.getResultList();
+        return results;
+	}
+	
 }

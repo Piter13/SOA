@@ -14,15 +14,15 @@
 <h:body>
 	<ui:fragment rendered="#{not securityController.isAuthenticated()}">
 		<h:form>
-			<h:commandButton value="Log in" action="login?faces-redirect=true" />
+			<p:commandButton value="Log in" action="login?faces-redirect=true" />
 		</h:form>
 	</ui:fragment>
 
 	<ui:fragment rendered="#{securityController.isAuthenticated()}">
 		<h:form>
-			<h:commandButton value="Home" action="home?faces-redirect=true" />
-			<h:commandButton value="Add new castle" action="category?faces-redirect=true" />
-			<h:commandButton value="Log out" actionListener="#{securityController.logout()}" />
+			<p:commandButton value="Home" action="home?faces-redirect=true" />
+			<p:commandButton value="Add new castle" action="category?faces-redirect=true" />
+			<p:commandButton value="Log out" actionListener="#{securityController.logout()}" />
 		</h:form>
 	    <h:form>
 	    	Name: <h:inputText value="#{jsfController.name}"></h:inputText><br/>
@@ -34,7 +34,7 @@
 		        <f:selectItems value="#{jsfController.getCastles()}"/>
 		     </h:selectOneMenu>
 		     <br/>
-		     <h:commandButton value="Submit" action="#{jsfController.addElement()}"></h:commandButton>
+		     <p:commandButton value="Submit" action="#{jsfController.addElement()}" />
 	    </h:form>  
 	</ui:fragment> 
 </h:body>

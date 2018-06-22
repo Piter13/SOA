@@ -8,7 +8,7 @@ import pl.marganski.soa.jpa.entities.Mag.Power;
 @Data
 @XmlRootElement
 public class MagDTO {
-	private int id;
+	private Integer id;
 	private String name;
 	private int mana;
 	private Element element;

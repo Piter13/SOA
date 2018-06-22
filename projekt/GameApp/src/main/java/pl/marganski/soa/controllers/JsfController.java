@@ -73,7 +73,7 @@ public class JsfController {
 			magDTO.setId(Integer.valueOf(elementId));
 			magService.updateMag(magDTO);
 		} else {
-			magService.addMag(magDTO);
+			magService.saveMag(magDTO);
 		}
 
 		this.elementId = null;

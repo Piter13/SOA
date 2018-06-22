@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -18,12 +19,16 @@ import javax.ws.rs.core.Response;
 import pl.marganski.soa.ejb.services.*;
 import pl.marganski.soa.jpa.entities.*;
 import pl.marganski.soa.jpa.entities.dto.MagDTO;
+import pl.marganski.soa.rest.controllers.auth.Authentication;
 
 @Path("/mags")
 public class MagController {
 
 	@EJB
 	private MagService magService;
+	
+	@EJB
+	private Authentication authentication;
 
 	@GET
     @Path("/")
@@ -44,8 +49,11 @@ public class MagController {
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addMag(MagDTO magDTO) {
-		magService.addMag(magDTO);
+	public Response addMag(MagDTO magDTO, @HeaderParam("Authorization") String authorizationString) {
+		if (!authentication.isAuthorized(authorizationString)) {
+			return Response.status(401).build();
+		}
+		magService.saveMag(magDTO);
         return Response.ok().build();
 	}
 	

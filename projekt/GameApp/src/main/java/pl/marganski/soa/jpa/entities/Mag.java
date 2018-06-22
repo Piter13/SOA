@@ -30,7 +30,9 @@ import lombok.ToString;
 	@NamedQuery(name="mag.allMags", query="SELECT e FROM Mag e"),
 	@NamedQuery(name="mag.allMagsInCastle", query="SELECT e FROM Mag e WHERE e.castle = :castle"),
 	@NamedQuery(name="mag.deleteMag", query="DELETE FROM Mag e WHERE e.id = :id"),
-	@NamedQuery(name="mag.deleteMagsInCastle", query="DELETE FROM Mag e WHERE e.castle = :castle")
+	@NamedQuery(name="mag.deleteMagsInCastle", query="DELETE FROM Mag e WHERE e.castle = :castle"),
+	@NamedQuery(name="mag.bestMags", query="SELECT e FROM Mag e ORDER BY e.mana DESC"),
+	@NamedQuery(name="mag.maxMana", query="SELECT MAX(e.mana) FROM Mag e")
 }) 
 public class Mag {
 	@Id

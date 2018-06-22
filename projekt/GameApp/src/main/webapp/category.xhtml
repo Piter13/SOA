@@ -15,15 +15,15 @@
 <h:body>
 	<ui:fragment rendered="#{not securityController.isAuthenticated()}">
 		<h:form>
-			<h:commandButton value="Log in" action="login?faces-redirect=true" />
+			<p:commandButton value="Log in" action="login?faces-redirect=true" />
 		</h:form>
 	</ui:fragment>
 
 	<ui:fragment rendered="#{securityController.isAuthenticated()}">
 		<h:form>
-			<h:commandButton value="Home" action="home?faces-redirect=true" />
-			<h:commandButton value="Add new mag" action="element?faces-redirect=true" />
-			<h:commandButton value="Log out" actionListener="#{securityController.logout()}" />
+			<p:commandButton value="Home" action="home?faces-redirect=true" />
+			<p:commandButton value="Add new mag" action="element?faces-redirect=true" />
+			<p:commandButton value="Log out" actionListener="#{securityController.logout()}" />
 		</h:form>
 	    <h:form>
 		    Castle's height: :<h:inputText value="#{jsfController.height}"></h:inputText><br/>
@@ -32,7 +32,7 @@
 		        <f:selectItems value="#{jsfController.getCategories()}"/>
 		     </h:selectOneMenu>
 		     <br/>
-		     <h:commandButton value="Submit" action="#{jsfController.addCategory()}"></h:commandButton>
+		     <p:commandButton value="Submit" action="#{jsfController.addCategory()}" />
 	    </h:form>  
 	</ui:fragment>
 </h:body>
